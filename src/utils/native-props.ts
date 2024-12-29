@@ -1,6 +1,6 @@
-import React, { AriaAttributes } from 'react'
-import type { CSSProperties, ReactElement } from 'react'
 import classNames from 'classnames'
+import type { CSSProperties, ReactElement } from 'react'
+import React, { AriaAttributes } from 'react'
 
 export type NativeProps<S extends string = never> = {
   className?: string
@@ -10,7 +10,9 @@ export type NativeProps<S extends string = never> = {
 
 export function withNativeProps<P extends NativeProps>(
   props: P,
-  element: ReactElement
+  element: ReactElement<{
+    [key: string]: any
+  }>
 ) {
   const p = {
     ...element.props,

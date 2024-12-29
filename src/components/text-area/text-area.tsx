@@ -1,12 +1,12 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react'
-import type { ReactNode } from 'react'
 import { useIsomorphicLayoutEffect } from 'ahooks'
+import type { ReactNode } from 'react'
+import React, { forwardRef, useImperativeHandle, useRef } from 'react'
 import runes from 'runes2'
+import useInputHandleKeyDown from '../../components/input/useInputHandleKeyDown'
+import { devError } from '../../utils/dev-log'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { usePropsValue } from '../../utils/use-props-value'
 import { mergeProps } from '../../utils/with-default-props'
-import { devError } from '../../utils/dev-log'
-import useInputHandleKeyDown from '../../components/input/useInputHandleKeyDown'
 
 const classPrefix = 'adm-text-area'
 
@@ -87,7 +87,7 @@ export const TextArea = forwardRef<TextAreaRef, TextAreaProps>(
         '`value` prop on `TextArea` should not be `null`. Consider using an empty string to clear the component.'
       )
     }
-    const nativeTextAreaRef = useRef<HTMLTextAreaElement>(null)
+    const nativeTextAreaRef = useRef<HTMLTextAreaElement>(null!)
     // https://github.com/ant-design/ant-design-mobile/issues/5961
     const heightRef = useRef<string>('auto')
     // https://github.com/ant-design/ant-design-mobile/issues/6051
@@ -218,5 +218,3 @@ export const TextArea = forwardRef<TextAreaRef, TextAreaProps>(
     )
   }
 )
-
-TextArea.defaultProps = defaultProps

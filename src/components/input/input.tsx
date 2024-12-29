@@ -88,7 +88,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   const [value, setValue] = usePropsValue(mergedProps)
   const [hasFocus, setHasFocus] = useState(false)
   const compositionStartRef = useRef(false)
-  const nativeInputRef = useRef<HTMLInputElement>(null)
+  const nativeInputRef = useRef<HTMLInputElement>(null!)
 
   const handleKeydown = useInputHandleKeyDown({
     onEnterPress: mergedProps.onEnterPress,

@@ -1,14 +1,14 @@
-import React, { forwardRef, useRef, useState, useImperativeHandle } from 'react'
-import type { ReactNode, ReactElement } from 'react'
-import classNames from 'classnames'
-import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { useThrottleFn } from 'ahooks'
-import { mergeProps } from '../../utils/with-default-props'
-import { Sidebar } from './sidebar'
+import classNames from 'classnames'
+import type { ReactElement, ReactNode } from 'react'
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { convertPx } from '../../utils/convert-px'
-import { Panel } from './panel'
 import { devWarning } from '../../utils/dev-log'
+import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { traverseReactNode } from '../../utils/traverse-react-node'
+import { mergeProps } from '../../utils/with-default-props'
+import { Panel } from './panel'
+import { Sidebar } from './sidebar'
 
 const classPrefix = `adm-index-bar`
 
@@ -37,7 +37,8 @@ export const IndexBar = forwardRef<IndexBarRef, IndexBarProps>((p, ref) => {
   }[] = []
   const panels: ReactElement[] = []
 
-  traverseReactNode(props.children, child => {
+  traverseReactNode(props.children, _child => {
+    const child = _child as ReactElement<{ [key: string]: any }>
     if (!React.isValidElement(child)) return
     if (child.type !== Panel) {
       devWarning(

@@ -66,8 +66,8 @@ export const NoticeBar = memo<NoticeBarProps>(props => {
     props.closeIcon
   )
 
-  const containerRef = useRef<HTMLSpanElement>(null)
-  const textRef = useRef<HTMLSpanElement>(null)
+  const containerRef = useRef<HTMLSpanElement>(null!)
+  const textRef = useRef<HTMLSpanElement>(null!)
 
   const [visible, setVisible] = useState(true)
 

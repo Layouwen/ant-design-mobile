@@ -48,7 +48,7 @@ export const Ellipsis: FC<EllipsisProps> = p => {
   } = props
 
   // ============================ Refs ============================
-  const rootRef = React.useRef<HTMLDivElement>(null)
+  const rootRef = React.useRef<HTMLDivElement>(null!)
 
   // ========================== Expanded ==========================
   const [expanded, setExpanded] = React.useState(defaultExpanded)

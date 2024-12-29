@@ -1,13 +1,13 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
-import type { ReactNode } from 'react'
-import { NativeProps, withNativeProps } from '../../utils/native-props'
+import { animated, useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { useSpring, animated } from '@react-spring/web'
-import { supportsPassive } from '../../utils/supports-passive'
-import { nearest } from '../../utils/nearest'
-import { mergeProps } from '../../utils/with-default-props'
-import { useLockScroll } from '../../utils/use-lock-scroll'
 import { useMemoizedFn } from 'ahooks'
+import type { ReactNode } from 'react'
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import { NativeProps, withNativeProps } from '../../utils/native-props'
+import { nearest } from '../../utils/nearest'
+import { supportsPassive } from '../../utils/supports-passive'
+import { useLockScroll } from '../../utils/use-lock-scroll'
+import { mergeProps } from '../../utils/with-default-props'
 
 const classPrefix = 'adm-floating-panel'
 
@@ -39,7 +39,7 @@ export const FloatingPanel = forwardRef<FloatingPanelRef, FloatingPanelProps>(
 
     const possibles = anchors.map(x => -x)
 
-    const elementRef = useRef<HTMLDivElement>(null)
+    const elementRef = useRef<HTMLDivElement>(null!)
     const headerRef = useRef<HTMLDivElement>(null)
     const contentRef = useRef<HTMLDivElement>(null)
     const [pulling, setPulling] = useState(false)

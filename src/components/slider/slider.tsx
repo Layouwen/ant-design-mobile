@@ -1,15 +1,15 @@
-import React, { useMemo, useRef } from 'react'
-import type { FC, ReactNode } from 'react'
-import { NativeProps, withNativeProps } from '../../utils/native-props'
-import classNames from 'classnames'
-import Ticks from './ticks'
-import Marks, { SliderMarks } from './marks'
 import getMiniDecimal, { toFixed } from '@rc-component/mini-decimal'
-import Thumb from './thumb'
-import { mergeProps } from '../../utils/with-default-props'
+import classNames from 'classnames'
+import type { FC, ReactNode } from 'react'
+import React, { useMemo, useRef } from 'react'
+import { devWarning } from '../../utils/dev-log'
+import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { nearest } from '../../utils/nearest'
 import { usePropsValue } from '../../utils/use-props-value'
-import { devWarning } from '../../utils/dev-log'
+import { mergeProps } from '../../utils/with-default-props'
+import Marks, { SliderMarks } from './marks'
+import Thumb from './thumb'
+import Ticks from './ticks'
 
 const classPrefix = `adm-slider`
 
@@ -101,7 +101,7 @@ export const Slider: FC<SliderProps> = p => {
     setRawValue(reverseValue(next))
   }
 
-  const trackRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null!)
 
   const fillSize = `${(100 * (sliderValue[1] - sliderValue[0])) / (max - min)}%`
   const fillStart = `${(100 * (sliderValue[0] - min)) / (max - min)}%`
@@ -177,7 +177,7 @@ export const Slider: FC<SliderProps> = p => {
     onAfterChange(nextSliderValue)
   }
 
-  const valueBeforeDragRef = useRef<[number, number]>()
+  const valueBeforeDragRef = useRef<[number, number]>(null)
 
   const renderThumb = (index: number) => {
     return (

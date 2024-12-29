@@ -1,14 +1,14 @@
-import React, { isValidElement, useRef } from 'react'
-import type { FC, ReactNode, ReactElement } from 'react'
-import classNames from 'classnames'
 import { animated } from '@react-spring/web'
+import classNames from 'classnames'
+import type { FC, ReactElement, ReactNode } from 'react'
+import React, { isValidElement, useRef } from 'react'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
+import { ShouldRender } from '../../utils/should-render'
+import { traverseReactNode } from '../../utils/traverse-react-node'
 import { usePropsValue } from '../../utils/use-props-value'
 import { useResizeEffect } from '../../utils/use-resize-effect'
 import { useTabListScroll } from '../../utils/use-tab-list-scroll'
 import ScrollMask from '../scroll-mask'
-import { ShouldRender } from '../../utils/should-render'
-import { traverseReactNode } from '../../utils/traverse-react-node'
 
 const classPrefix = `adm-capsule-tabs`
 
@@ -28,10 +28,9 @@ export type CapsuleTabsProps = {
   onChange?: (key: string) => void
   children?: ReactNode
 } & NativeProps
-
 export const CapsuleTabs: FC<CapsuleTabsProps> = props => {
-  const tabListContainerRef = useRef<HTMLDivElement>(null)
-  const rootRef = useRef<HTMLDivElement>(null)
+  const tabListContainerRef = useRef<HTMLDivElement>(null!)
+  const rootRef = useRef<HTMLDivElement>(null!)
   const keyToIndexRecord: Record<string, number> = {}
   let firstActiveKey: string | null = null
 

@@ -1,19 +1,19 @@
-import classNames from 'classnames'
-import React, { useState, useRef } from 'react'
-import type { FC, PropsWithChildren } from 'react'
-import { useIsomorphicLayoutEffect, useUnmountedRef } from 'ahooks'
-import { NativeProps, withNativeProps } from '../../utils/native-props'
-import { mergeProps } from '../../utils/with-default-props'
-import Mask from '../mask'
-import { useLockScroll } from '../../utils/use-lock-scroll'
-import { renderToContainer } from '../../utils/render-to-container'
-import { useSpring, animated } from '@react-spring/web'
-import { withStopPropagation } from '../../utils/with-stop-propagation'
-import { ShouldRender } from '../../utils/should-render'
-import { defaultPopupBaseProps, PopupBaseProps } from './popup-base-props'
-import { useInnerVisible } from '../../utils/use-inner-visible'
-import { useConfig } from '../config-provider'
+import { animated, useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
+import { useIsomorphicLayoutEffect, useUnmountedRef } from 'ahooks'
+import classNames from 'classnames'
+import type { FC, PropsWithChildren } from 'react'
+import React, { useRef, useState } from 'react'
+import { NativeProps, withNativeProps } from '../../utils/native-props'
+import { renderToContainer } from '../../utils/render-to-container'
+import { ShouldRender } from '../../utils/should-render'
+import { useInnerVisible } from '../../utils/use-inner-visible'
+import { useLockScroll } from '../../utils/use-lock-scroll'
+import { mergeProps } from '../../utils/with-default-props'
+import { withStopPropagation } from '../../utils/with-stop-propagation'
+import { useConfig } from '../config-provider'
+import Mask from '../mask'
+import { defaultPopupBaseProps, PopupBaseProps } from './popup-base-props'
 
 const classPrefix = `adm-popup`
 
@@ -41,7 +41,7 @@ export const Popup: FC<PopupProps> = p => {
   )
 
   const [active, setActive] = useState(props.visible)
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null!)
   useLockScroll(ref, props.disableBodyScroll && active ? 'strict' : false)
 
   useIsomorphicLayoutEffect(() => {

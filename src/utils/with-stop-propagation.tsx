@@ -1,15 +1,17 @@
-import React from 'react'
 import type { ReactElement } from 'react'
+import React from 'react'
 export type PropagationEvent = 'click' | 'touchstart'
 
 const eventToPropRecord: Record<PropagationEvent, string> = {
   'click': 'onClick',
-  'touchstart': 'onTouchStart'
+  'touchstart': 'onTouchStart',
 }
 
 export function withStopPropagation(
   events: PropagationEvent[],
-  element: ReactElement
+  element: ReactElement<{
+    [key: string]: any
+  }>
 ) {
   const props: Record<string, any> = { ...element.props }
   for (const key of events) {

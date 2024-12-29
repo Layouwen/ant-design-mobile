@@ -1,20 +1,20 @@
-import React, { forwardRef, useMemo } from 'react'
-import type { ReactNode, ForwardedRef } from 'react'
 import classNames from 'classnames'
-import { NativeProps } from '../../utils/native-props'
-import List, { ListProps } from '../list'
-import RcForm from 'rc-field-form'
-import type {
-  FormProps as RcFormProps,
-  FormInstance as RCFormInstance,
-} from 'rc-field-form'
-import { defaultFormContext, FormContext, FormContextType } from './context'
-import { mergeProps } from '../../utils/with-default-props'
-import { Header } from './header'
-import { useConfig } from '../config-provider'
 import merge from 'deepmerge'
-import { FormArray } from './form-array'
+import type {
+  FormInstance as RCFormInstance,
+  FormProps as RcFormProps,
+} from 'rc-field-form'
+import RcForm from 'rc-field-form'
+import type { ForwardedRef, ReactElement, ReactNode } from 'react'
+import React, { forwardRef, useMemo } from 'react'
+import { NativeProps } from '../../utils/native-props'
 import { traverseReactNode } from '../../utils/traverse-react-node'
+import { mergeProps } from '../../utils/with-default-props'
+import { useConfig } from '../config-provider'
+import List, { ListProps } from '../list'
+import { defaultFormContext, FormContext, FormContextType } from './context'
+import { FormArray } from './form-array'
+import { Header } from './header'
 
 const classPrefix = 'adm-form'
 
@@ -103,7 +103,7 @@ export const Form = forwardRef<FormInstance, FormProps>((p, ref) => {
     if (React.isValidElement(child)) {
       if (child.type === Header) {
         collect()
-        currentHeader = child.props.children
+        currentHeader = (child as ReactElement<any>).props.children
         return
       }
       if (child.type === FormArray) {

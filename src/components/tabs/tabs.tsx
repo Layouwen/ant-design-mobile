@@ -1,17 +1,17 @@
-import React, { isValidElement, useRef } from 'react'
-import type { FC, ReactNode, ReactElement } from 'react'
+import { animated, useSpring } from '@react-spring/web'
+import { useIsomorphicLayoutEffect, useThrottleFn } from 'ahooks'
 import classNames from 'classnames'
-import { useSpring, animated } from '@react-spring/web'
-import { NativeProps, withNativeProps } from '../../utils/native-props'
-import { usePropsValue } from '../../utils/use-props-value'
+import type { FC, ReactElement, ReactNode } from 'react'
+import React, { isValidElement, useRef } from 'react'
 import { bound } from '../../utils/bound'
-import { useThrottleFn, useIsomorphicLayoutEffect } from 'ahooks'
-import { useMutationEffect } from '../../utils/use-mutation-effect'
-import { useResizeEffect } from '../../utils/use-resize-effect'
-import { mergeProps } from '../../utils/with-default-props'
-import { useIsomorphicUpdateLayoutEffect } from '../../utils/use-isomorphic-update-layout-effect'
+import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { ShouldRender } from '../../utils/should-render'
 import { traverseReactNode } from '../../utils/traverse-react-node'
+import { useIsomorphicUpdateLayoutEffect } from '../../utils/use-isomorphic-update-layout-effect'
+import { useMutationEffect } from '../../utils/use-mutation-effect'
+import { usePropsValue } from '../../utils/use-props-value'
+import { useResizeEffect } from '../../utils/use-resize-effect'
+import { mergeProps } from '../../utils/with-default-props'
 
 const classPrefix = `adm-tabs`
 
@@ -59,7 +59,7 @@ const defaultProps = {
 
 export const Tabs: FC<TabsProps> = p => {
   const props = mergeProps(defaultProps, p)
-  const tabListContainerRef = useRef<HTMLDivElement>(null)
+  const tabListContainerRef = useRef<HTMLDivElement>(null!)
   const activeLineRef = useRef<HTMLDivElement>(null)
   const keyToIndexRecord: Record<string, number> = {}
   let firstActiveKey: string | null = null

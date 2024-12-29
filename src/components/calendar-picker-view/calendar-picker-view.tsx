@@ -88,7 +88,7 @@ export const CalendarPickerView = forwardRef<
   CalendarPickerViewRef,
   CalendarPickerViewProps
 >((p, ref) => {
-  const bodyRef = useRef<HTMLDivElement>(null)
+  const bodyRef = useRef<HTMLDivElement>(null!)
   const today = dayjs()
   const props = mergeProps(defaultProps, p)
   const { locale } = useConfig()

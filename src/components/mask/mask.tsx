@@ -1,20 +1,20 @@
-import { NativeProps, withNativeProps } from '../../utils/native-props'
-import React, { useMemo, useRef, useState } from 'react'
-import type { FC, ReactNode } from 'react'
+import { animated, useSpring } from '@react-spring/web'
 import { useUnmountedRef } from 'ahooks'
-import { useLockScroll } from '../../utils/use-lock-scroll'
-import { useSpring, animated } from '@react-spring/web'
+import type { FC, ReactNode } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
+import { NativeProps, withNativeProps } from '../../utils/native-props'
 import {
-  renderToContainer,
   GetContainer,
+  renderToContainer,
 } from '../../utils/render-to-container'
-import { mergeProps } from '../../utils/with-default-props'
-import { useConfig } from '../config-provider'
 import { ShouldRender } from '../../utils/should-render'
+import { useLockScroll } from '../../utils/use-lock-scroll'
+import { mergeProps } from '../../utils/with-default-props'
 import {
   PropagationEvent,
   withStopPropagation,
 } from '../../utils/with-stop-propagation'
+import { useConfig } from '../config-provider'
 
 const classPrefix = `adm-mask`
 
@@ -58,7 +58,7 @@ export const Mask: FC<MaskProps> = p => {
   const props = mergeProps(defaultProps, p)
   const { locale } = useConfig()
 
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null!)
 
   useLockScroll(ref, props.visible && props.disableBodyScroll)
 

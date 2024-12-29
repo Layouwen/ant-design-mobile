@@ -1,5 +1,5 @@
+import type { ReactElement, ReactNode } from 'react'
 import React from 'react'
-import type { ReactNode } from 'react'
 import { isFragment } from 'react-is'
 
 export function traverseReactNode(
@@ -13,7 +13,8 @@ export function traverseReactNode(
         fn(child, i)
         i += 1
       } else {
-        handle(child.props.children)
+        const fragmentChild = child as ReactElement<{ children: ReactNode }>
+        handle(fragmentChild.props.children)
       }
     })
   }

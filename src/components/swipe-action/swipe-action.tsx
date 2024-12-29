@@ -1,3 +1,6 @@
+import { animated, useSpring } from '@react-spring/web'
+import { useDrag } from '@use-gesture/react'
+import type { ReactNode } from 'react'
 import React, {
   forwardRef,
   RefObject,
@@ -5,17 +8,14 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react'
-import type { ReactNode } from 'react'
-import { mergeProps } from '../../utils/with-default-props'
-import { useSpring, animated } from '@react-spring/web'
-import { useDrag } from '@use-gesture/react'
-import Button from '../button'
-import { nearest } from '../../utils/nearest'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
+import { nearest } from '../../utils/nearest'
+import { mergeProps } from '../../utils/with-default-props'
 import {
   PropagationEvent,
   withStopPropagation,
 } from '../../utils/with-stop-propagation'
+import Button from '../button'
 
 const classPrefix = `adm-swipe-action`
 
@@ -66,8 +66,8 @@ export const SwipeAction = forwardRef<SwipeActionRef, SwipeActionProps>(
 
     const rootRef = useRef<HTMLDivElement>(null)
 
-    const leftRef = useRef<HTMLDivElement>(null)
-    const rightRef = useRef<HTMLDivElement>(null)
+    const leftRef = useRef<HTMLDivElement>(null!)
+    const rightRef = useRef<HTMLDivElement>(null!)
     function getWidth(ref: RefObject<HTMLDivElement>) {
       const element = ref.current
       if (!element) return 0

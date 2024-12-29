@@ -4,7 +4,7 @@ import { Field, FormInstance } from 'rc-field-form'
 import type { FieldProps } from 'rc-field-form/lib/Field'
 import FieldContext from 'rc-field-form/lib/FieldContext'
 import type { InternalNamePath, Meta } from 'rc-field-form/lib/interface'
-import type { FC, MutableRefObject, ReactNode } from 'react'
+import type { FC, JSX, MutableRefObject, ReactElement, ReactNode } from 'react'
 import React, { useCallback, useContext, useRef, useState } from 'react'
 import { devWarning } from '../../utils/dev-log'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
@@ -439,13 +439,16 @@ export const FormItem: FC<FormItemProps> = props => {
             'Must set `name` or use render props when `dependencies` is set.'
           )
         } else if (React.isValidElement(children)) {
-          if (children.props.defaultValue) {
+          const _children = children as ReactElement<{
+            [key: string]: any
+          }>
+          if (_children.props.defaultValue) {
             devWarning(
               'Form.Item',
               '`defaultValue` will not work on controlled Field. You should use `initialValues` of Form instead.'
             )
           }
-          const childProps = { ...children.props, ...control }
+          const childProps = { ..._children.props, ...control }
 
           if (isSafeSetRefComponent(children)) {
             childProps.ref = (instance: any) => {
@@ -475,7 +478,7 @@ export const FormItem: FC<FormItemProps> = props => {
           triggers.forEach(eventName => {
             childProps[eventName] = (...args: any[]) => {
               control[eventName]?.(...args)
-              children.props[eventName]?.(...args)
+              _children.props[eventName]?.(...args)
             }
           })
 
