@@ -7,7 +7,7 @@ export default function useSyncScroll(
   visible: boolean,
   bodyRef: React.RefObject<HTMLDivElement>
 ) {
-  const rafRef = useRef<number>(null)
+  const rafRef = useRef<number | null>(null)
 
   const clean = () => {
     if (rafRef.current) {

@@ -177,7 +177,7 @@ export const Slider: FC<SliderProps> = p => {
     onAfterChange(nextSliderValue)
   }
 
-  const valueBeforeDragRef = useRef<[number, number]>(null)
+  const valueBeforeDragRef = useRef<[number, number] | null>(null)
 
   const renderThumb = (index: number) => {
     return (
