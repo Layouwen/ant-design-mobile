@@ -1,15 +1,23 @@
 import type { ReactElement } from 'react'
-import { render, unmount as reactUnmount } from './render'
+import {
+  UnmountType,
+  getReactRender,
+} from '../components/config-provider/UnstableContext'
 
 export function renderToBody(element: ReactElement) {
   const container = document.createElement('div')
   document.body.appendChild(container)
+  // eslint-disable-next-line prefer-const
+  let reactUnmount: UnmountType
+
   function unmount() {
-    const unmountResult = reactUnmount(container)
-    if (unmountResult && container.parentNode) {
-      container.parentNode.removeChild(container)
-    }
+    reactUnmount().then(() => {
+      if (container.parentNode) {
+        container.parentNode.removeChild(container)
+      }
+    })
   }
-  render(element, container)
+  const reactRender = getReactRender()
+  reactUnmount = reactRender(element, container)
   return unmount
 }
